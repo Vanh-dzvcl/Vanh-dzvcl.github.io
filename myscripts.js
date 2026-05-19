@@ -1,1 +1,260 @@
-(function(){function t(){o.width=window.innerWidth,o.height=window.innerHeight}function e(){const t=Math.floor(o.width/a);l=Array.from({length:t},()=>Math.random()*(-o.height/a)*2)}function n(){i.fillStyle="rgba(5, 5, 8, 0.05)",i.fillRect(0,0,o.width,o.height),i.font=a+"px monospace",l.forEach((t,e)=>{const n=e*a,r=Math.max(0,.8-t/(o.height/a)*.4);i.fillStyle=`rgba(180, 130, 255, ${.7*r})`,i.fillText(s[Math.floor(Math.random()*s.length)],n,t*a),i.fillStyle=`rgba(230, 210, 255, ${r})`,i.fillText(s[Math.floor(Math.random()*s.length)],n,(t+1)*a),l[e]++,t*a>o.height&&Math.random()>.975&&(l[e]=0)})}const o=document.getElementById("matrix-canvas"),i=o.getContext("2d");t(),window.addEventListener("resize",t);const s="アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ0123456789ABCDEF<>{}[]()#@$%^&*",a=14;let l=[];e(),window.addEventListener("resize",e),setInterval(n,48)})(),document.addEventListener("mousemove",t=>{const e=document.createElement("div");e.className="trail-particle";const n=8*Math.random()+3;Object.assign(e.style,{width:n+"px",height:n+"px",left:t.clientX-n/2+"px",top:t.clientY-n/2+"px",opacity:"0.8"}),document.body.appendChild(e),requestAnimationFrame(()=>{e.style.opacity="0",e.style.transform=`scale(0.1) translate(${30*(Math.random()-.5)}px, ${30*(Math.random()-.5)}px)`}),setTimeout(()=>e.remove(),600)}),function(){function t(){const a=e[o];n.textContent=s?a.substring(0,--i):a.substring(0,++i);let l=s?45:90;s||i!==a.length?s&&0===i&&(s=!1,o=(o+1)%e.length,l=300):(l=1800,s=!0),setTimeout(t,l)}const e=["First-year Student","Junior Developer","CS2 / AOV Enjoyer","Kn1ghT"],n=document.querySelector(".profile-tagline");if(!n)return;let o=0,i=0,s=!1;setTimeout(t,800)}(),function(){const t=document.getElementById("terminal-skills");if(!t)return;const e=new IntersectionObserver(t=>{t.forEach(t=>{if(!t.isIntersecting)return;const n=t.target.querySelectorAll(".skill-fill");n.forEach((t,e)=>{setTimeout(()=>{t.style.width=t.dataset.width},180*e)}),e.unobserve(t.target)})},{threshold:.25});e.observe(t),setTimeout(()=>{t.querySelectorAll(".skill-fill").forEach((t,e)=>{""===t.style.width&&setTimeout(()=>{t.style.width=t.dataset.width},180*e)})},1200)}(),function(){function t(){const t=new Date,e=String(t.getHours()).padStart(2,"0"),n=String(t.getMinutes()).padStart(2,"0"),i=String(t.getSeconds()).padStart(2,"0");o.textContent=`${e}:${n}:${i}`}function e(){const t=Math.floor(30*Math.random()+5);n.textContent=`LAT:${t}ms`}const n=document.getElementById("sys-lat"),o=document.getElementById("sys-time");t(),setInterval(t,1e3),setInterval(e,3e3)}(),function(){function t(){document.body.style.animation="rainbowFlash 0.5s ease 6",setTimeout(()=>{document.body.style.animation=""},3200);const t=document.querySelector(".avatar-glitch-container");t&&(t.style.animation="spin360 0.8s cubic-bezier(0.68,-0.55,0.265,1.55) 3",setTimeout(()=>{t.style.animation=""},2600));const e=document.createElement("div");e.className="konami-toast",e.textContent="[ KONAMI ACTIVATED — YOU FOUND IT 👾 ]",document.body.appendChild(e),setTimeout(()=>e.remove(),3e3)}const e=["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];let n=0;document.addEventListener("keydown",o=>{n=o.key===e[n]?n+1:o.key===e[0]?1:0,n===e.length&&(n=0,t())})}(),function(){function t(t,e,n){function o(){if(s>=i.length)return t.innerHTML=e.html,void setTimeout(n,200);const a=document.createElement("span");a.className="t-cursor",t.textContent=i.substring(0,++s),t.appendChild(a),setTimeout(o,50)}const i=e.plain;let s=0;o()}function e(){if(i>=o.length)return void setTimeout(()=>{n.innerHTML="",i=0,setTimeout(e,400)},3e3);const s=document.createElement("div");n.appendChild(s);const a=o[i];a.type?t(s,a,()=>{i++,setTimeout(e,150)}):(s.innerHTML=a.html,i++,setTimeout(e,5===i?600:300))}const n=document.getElementById("mini-term-output");if(!n)return;const o=[{html:'<span class="t-include">#include</span> <span class="t-string">&lt;iostream&gt;</span>',plain:"#include <iostream>",type:!0},{html:'<span class="t-keyword">using namespace</span> std;',plain:"using namespace std;",type:!0},{html:'<span class="t-keyword">int</span> <span class="t-func">main</span>() {',plain:"int main() {",type:!0},{html:'&nbsp;&nbsp;cout <span class="t-keyword">&lt;&lt;</span> <span class="t-string">"Phan Viet Anh"</span>;',plain:'  cout << "Phan Viet Anh";',type:!0},{html:"}",plain:"}",type:!0},{html:'<span class="t-comment">$ g++ main.cpp && ./a.out</span>',plain:null,type:!1},{html:'<span class="t-output">&gt; Phan Viet Anh</span>',plain:null,type:!1}];let i=0;setTimeout(e,800)}();
+
+(function() {
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx    = canvas.getContext('2d');
+
+    function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const CHARS   = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ0123456789ABCDEF<>{}[]()#@$%^&*';
+    const FS      = 14;
+    let   cols    = [];
+
+    function initCols() {
+        const n = Math.floor(canvas.width / FS);
+        cols = Array.from({ length: n }, () => Math.random() * -(canvas.height / FS) * 2);
+    }
+    initCols();
+    window.addEventListener('resize', initCols);
+
+    function draw() {
+        ctx.fillStyle = 'rgba(5, 5, 8, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = FS + 'px monospace';
+
+        cols.forEach((y, i) => {
+            const x = i * FS;
+
+            
+            const alpha = Math.max(0, 0.8 - (y / (canvas.height / FS)) * 0.4);
+            ctx.fillStyle = `rgba(180, 130, 255, ${alpha * 0.7})`;
+            ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], x, y * FS);
+
+            
+            ctx.fillStyle = `rgba(230, 210, 255, ${alpha})`;
+            ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], x, (y + 1) * FS);
+
+            cols[i]++;
+            if (y * FS > canvas.height && Math.random() > 0.975) cols[i] = 0;
+        });
+    }
+
+    setInterval(draw, 48);
+})();
+
+
+
+(function() {
+    document.addEventListener('mousemove', (e) => {
+        const p = document.createElement('div');
+        p.className = 'trail-particle';
+        const size = Math.random() * 8 + 3;
+        Object.assign(p.style, {
+            width:  size + 'px',
+            height: size + 'px',
+            left:   (e.clientX - size / 2) + 'px',
+            top:    (e.clientY - size / 2) + 'px',
+            opacity: '0.8'
+        });
+        document.body.appendChild(p);
+
+        
+        requestAnimationFrame(() => {
+            p.style.opacity   = '0';
+            p.style.transform = `scale(0.1) translate(${(Math.random()-0.5)*30}px, ${(Math.random()-0.5)*30}px)`;
+        });
+
+        setTimeout(() => p.remove(), 600);
+    });
+})();
+
+
+
+(function() {
+    const lines = [
+        'First-year Student',
+        'Junior Developer',
+        'CS2 / AOV Enjoyer',
+        'Kn1ghT',
+    ];
+
+    const el = document.querySelector('.profile-tagline');
+    if (!el) return;
+
+    let lineIdx = 0, charIdx = 0, deleting = false;
+
+    function tick() {
+        const cur = lines[lineIdx];
+
+        if (deleting) {
+            el.textContent = cur.substring(0, --charIdx);
+        } else {
+            el.textContent = cur.substring(0, ++charIdx);
+        }
+
+        let delay = deleting ? 45 : 90;
+
+        if (!deleting && charIdx === cur.length) {
+            delay = 1800;
+            deleting = true;
+        } else if (deleting && charIdx === 0) {
+            deleting = false;
+            lineIdx = (lineIdx + 1) % lines.length;
+            delay = 300;
+        }
+
+        setTimeout(tick, delay);
+    }
+
+    setTimeout(tick, 800);
+})();
+
+
+
+(function() {
+    const section = document.getElementById('terminal-skills');
+    if (!section) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const fills = entry.target.querySelectorAll('.skill-fill');
+            fills.forEach((bar, i) => {
+                setTimeout(() => {
+                    bar.style.width = bar.dataset.width;
+                }, i * 180);
+            });
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.25 });
+
+    
+    observer.observe(section);
+    
+    setTimeout(() => {
+        section.querySelectorAll('.skill-fill').forEach((bar, i) => {
+            if (bar.style.width === '') {
+                setTimeout(() => { bar.style.width = bar.dataset.width; }, i * 180);
+            }
+        });
+    }, 1200);
+})();
+
+
+
+(function() {
+    const latEl  = document.getElementById('sys-lat');
+    const timeEl = document.getElementById('sys-time');
+
+    function updateTime() {
+        const now = new Date();
+        const hh  = String(now.getHours()).padStart(2,'0');
+        const mm  = String(now.getMinutes()).padStart(2,'0');
+        const ss  = String(now.getSeconds()).padStart(2,'0');
+        timeEl.textContent = `${hh}:${mm}:${ss}`;
+    }
+
+    function pingLat() {
+        const fake = Math.floor(Math.random() * 30 + 5);
+        latEl.textContent = `LAT:${fake}ms`;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+    setInterval(pingLat,   3000);
+})();
+
+
+
+(function() {
+    const SEQ = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown',
+                 'ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let idx = 0;
+
+    document.addEventListener('keydown', (e) => {
+        idx = (e.key === SEQ[idx]) ? idx + 1 : (e.key === SEQ[0] ? 1 : 0);
+        if (idx === SEQ.length) {
+            idx = 0;
+            activateKonami();
+        }
+    });
+
+    function activateKonami() {
+        
+        document.body.style.animation = 'rainbowFlash 0.5s ease 6';
+        setTimeout(() => { document.body.style.animation = ''; }, 3200);
+
+        
+        const av = document.querySelector('.avatar-glitch-container');
+        if (av) {
+            av.style.animation = 'spin360 0.8s cubic-bezier(0.68,-0.55,0.265,1.55) 3';
+            setTimeout(() => { av.style.animation = ''; }, 2600);
+        }
+
+        
+        const ghost = document.createElement('div');
+        ghost.className = 'konami-toast';
+        ghost.textContent = '[ KONAMI ACTIVATED — YOU FOUND IT 👾 ]';
+        document.body.appendChild(ghost);
+        setTimeout(() => ghost.remove(), 3000);
+    }
+})();
+
+(function () {
+    const out = document.getElementById('mini-term-output');
+    if (!out) return;
+
+    const lines = [
+        { html: '<span class="t-include">#include</span> <span class="t-string">&lt;iostream&gt;</span>', plain: '#include <iostream>', type: true },
+        { html: '<span class="t-keyword">using namespace</span> std;', plain: 'using namespace std;', type: true },
+        { html: '<span class="t-keyword">int</span> <span class="t-func">main</span>() {', plain: 'int main() {', type: true },
+        { html: '&nbsp;&nbsp;cout <span class="t-keyword">&lt;&lt;</span> <span class="t-string">"Phan Viet Anh"</span>;', plain: '  cout << "Phan Viet Anh";', type: true },
+        { html: '}', plain: '}', type: true },
+        { html: '<span class="t-comment">$ g++ main.cpp && ./a.out</span>', plain: null, type: false },
+        { html: '<span class="t-output">&gt; Phan Viet Anh</span>', plain: null, type: false },
+    ];
+
+    let li = 0;
+
+    function typeLine(rowEl, line, callback) {
+        const plain = line.plain;
+        let ci = 0;
+        function typeChar() {
+            if (ci >= plain.length) {
+                rowEl.innerHTML = line.html;
+                setTimeout(callback, 200);
+                return;
+            }
+            const cursor = document.createElement('span');
+            cursor.className = 't-cursor';
+            rowEl.textContent = plain.substring(0, ++ci);
+            rowEl.appendChild(cursor);
+            setTimeout(typeChar, 50);
+        }
+        typeChar();
+    }
+
+    function nextLine() {
+        if (li >= lines.length) {
+            setTimeout(() => { out.innerHTML = ''; li = 0; setTimeout(nextLine, 400); }, 3000);
+            return;
+        }
+        const row = document.createElement('div');
+        out.appendChild(row);
+        const line = lines[li];
+
+        if (line.type) {
+            typeLine(row, line, () => { li++; setTimeout(nextLine, 150); });
+        } else {
+            row.innerHTML = line.html;
+            li++;
+            setTimeout(nextLine, li === 5 ? 600 : 300); 
+        }
+    }
+
+    setTimeout(nextLine, 800);
+})();
