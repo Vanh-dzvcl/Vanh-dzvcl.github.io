@@ -124,8 +124,7 @@ body {
     background: linear-gradient(90deg, #e0c3fc, #b482ff); 
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    transition: all 0.2s;
-    text-shadow:  -2px -2px 0px rgba(253, 253, 253, 0.61), 2px 2px 0px rgba(148, 52, 156, 0.7);
+    transition: all 0.2;
 }
 
 @keyframes textGlitch {
