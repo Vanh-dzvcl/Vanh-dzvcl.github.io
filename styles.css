@@ -815,6 +815,15 @@ body {
         font-size: 12px;
         overflow-x: auto;
     }
+    .stats-grid {
+        /* Đập vỡ 4 cột, ép về 2 cột mỗi hàng (2x2) */
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
+    .badge-grid {
+        /* Sẵn tiện bóp luôn dàn Achievements về 2 cột cho đồng bộ, để 3 cột chữ nó lại chật */
+        grid-template-columns: repeat(2, 1fr); 
+    }
 
 }
 
@@ -838,6 +847,9 @@ body {
     .avatar-glitch-container {
         width: 100px !important;
         height: 100px !important;
+    }
+    .stats-grid, .badge-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -2055,4 +2067,18 @@ body.light-mode .badge-tooltip { background: rgba(255,255,255,0.95); color: #4c1
 body.light-mode .badge-rarity {
     /* Khi sang Light Mode thì tắt hết text-shadow phát quang để nhìn cho rõ */
     text-shadow: none !important;
+}
+@media screen and (max-width: 850px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .badge-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .stats-grid, .badge-grid {
+        grid-template-columns: 1fr !important;
+    }
 }
