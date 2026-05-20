@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="ie=edge" http-equiv="X-UA-Compatible" />
     <title>Phan Việt Anh's Profile</title>
-    <link href="pva.jpg" rel="icon" type="image/x-icon" />
+    <link href="pva1.jpg" rel="icon" type="image/x-icon" />
     <link href="styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+
 <body>
     <canvas id="matrix-canvas" style="position:fixed;top:0;left:0;z-index:-1;pointer-events:none;"></canvas>
     <div class="cyber-bg"></div>
@@ -16,21 +18,47 @@
     <div class="glow-orb orb-2"></div>
     <div class="overlay">
         <div class="profile-card">
-            
+
             <div class="profile-sidebar">
                 <div class="avatar-glitch-container">
                     <img src="pva1.jpg" alt="Phan Việt Anh" class="profile-avatar av-1">
-                    
+
                     <img src="pva.jpg" alt="Phan Việt Anh Glitch" class="profile-avatar av-2">
                 </div>
                 <h1 class="profile-name">Phan Việt Anh</h1>
                 <div class="typing-container">
                     <p class="profile-tagline"></p>
                 </div>
-                <div class="basic-info">
+                <div class="status-badge">
+                    <div class="xp-bar-wrap">
+                        <div class="xp-bar-label">
+                            <span>LVL <strong>18</strong></span>
+                            <span class="xp-class">[KNIGHT]</span>
+                            <span>2840 / 5000 XP</span>
+                        </div>
+                        <div class="xp-bar-track">
+                            <div class="xp-bar-fill" data-xp="56"></div>
+                        </div>
+                    </div>
+                    <span class="status-dot"></span>
+                    <span class="status-label">Online</span>
+                </div>
+                <div class="vibe-bar">
+                    <span class="vibe-icon" id="vibe-icon">⚡</span>
+                    <span class="vibe-text" id="vibe-text">Loading vibe...</span>
+                </div>
+                <div class="basic-info"> <!-- ← div riêng cho bio -->
                     <p><strong>Birth:</strong> 29/09/2007</p>
                     <p><strong>Lives in:</strong> Dong Nai and Ho Chi Minh City</p>
                     <p><strong>Studies at:</strong> Ho Chi Minh City University of Transport</p>
+                </div>
+                <!-- THAY ĐOẠN NÀY trong .profile-sidebar -->
+                <div class="now-playing"> <!-- ← đổi class từ basic-info -->
+                    <div class="np-label"><i class="fa-brands fa-soundcloud"></i>&nbsp;NOW PLAYING</div>
+                    <div class="np-title">thats all i can see - MR LO</div>
+                    <div class="np-bars">
+                        <span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
                 </div>
                 <div class="mini-terminal">
                     <div class="mini-term-header">
@@ -45,56 +73,128 @@
                     <span id="sys-lat">LAT:--ms</span> &nbsp;|&nbsp; <span id="sys-time">--:--:--</span>
                 </div>
             </div>
-
             <div class="profile-main-content">
                 <section id="mxh" class="profile-section">
                     <h1>Social Media</h1>
-                    <div class="khu-vuc-button">
-                        <a href="https://www.facebook.com/knight.so.bad" class="btn-pro btn-fb">
-                            <i class="fa-brands fa-facebook"></i> Phan Việt Anh
+                    <div class="game-cards"> 
+                        
+                        <a href="https://www.facebook.com/knight.so.bad" class="game-card" style="text-decoration: none;" target="_blank">
+                            <i class="fa-brands fa-facebook" style="color: #1877f2;"></i>
+                            <div class="gc-name">Facebook</div>
+                            <div class="gc-rank">Phan Việt Anh</div>
                         </a>
 
-                        <a href="https://www.instagram.com/_pva.thedeath/" class="btn-pro btn-ig">
-                            <i class="fa-brands fa-instagram"></i> liệu xuân đi hoa còn nở ?
+                        <a href="https://www.instagram.com/_pva.thedeath/" class="game-card" style="text-decoration: none;" target="_blank">
+                            <i class="fa-brands fa-instagram" style="color: #e1306c;"></i>
+                            <div class="gc-name">Instagram</div>
+                            <div class="gc-rank">_pva.thedeath</div>
                         </a>
 
-                        <a href="https://soundcloud.com/phan-vi-t-anh-620389200" class="btn-pro btn-sc">
-                            <i class="fa-brands fa-soundcloud"></i> Kn1ghT
+                        <a href="https://soundcloud.com/phan-vi-t-anh-620389200" class="game-card" style="text-decoration: none;" target="_blank">
+                            <i class="fa-brands fa-soundcloud" style="color: #ff5500;"></i>
+                            <div class="gc-name">SoundCloud</div>
+                            <div class="gc-rank">Kn1ghT</div>
                         </a>
-                    </div>
-                </section>
-                <section id="terminal-skills" class="profile-section">
-                    <h2>Skill</h2>
-                    <div class="terminal-box">
-                        <div class="terminal-header">
-                            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                            <span class="terminal-title">root@pva:~</span>
-                        </div>
-                        <div class="terminal-body">
-                            <p><span class="prompt">pva@:~$</span> gcc --version</p>
-                            <p class="output">> v2.0 Cpp....50%</p>
-                            
-                            <p><span class="prompt">pva@:~$</span> lua run_exploits.lua</p>
-                            <p class="output">> Executing scripts... Injection Success!</p>
-                            <p><span class="prompt">pva@:~$</span> _ <span class="blink"></span></p>
-                        </div>
+
                     </div>
                 </section>
                 <section id="thongtingame" class="profile-section">
                     <h2>Gaming</h2>
-                    <div class="khu-vuc-button">
-                        <a href="#" class="btn-pro btn-lq">
-                            <i class="fa-solid fa-mobile-screen-button"></i> AOV
-                        </a>
-
-                        <a href="#" class="btn-pro btn-tft">
-                            <i class="fa-solid fa-chess-knight"></i> TFT
-                        </a>
-
-                        <a href="#" class="btn-pro btn-cs2">
-                            <i class="fa-solid fa-crosshairs"></i> CS2
-                        </a>
+                    <div class="game-cards">
+                        <div class="game-card">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                            <div class="gc-name">AOV</div>
+                            <div class="gc-rank">Rank: Legendary</div>
+                        </div>
+                        <div class="game-card">
+                            <i class="fa-solid fa-chess-knight"></i>
+                            <div class="gc-name">TFT</div>
+                            <div class="gc-rank">Rank: Gold</div>
+                        </div>
+                        <div class="game-card">
+                            <i class="fa-solid fa-crosshairs"></i>
+                            <div class="gc-name">CS2</div>
+                            <div class="gc-rank">Rank: Gold Nova Master</div>
+                        </div>
                     </div>
+                </section>
+                <section id="terminal-skills" class="profile-section">
+                    <h2>Skill</h2>
+                    <div class="skill-bars">
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span>C++</span><span class="skill-pct">40%</span>
+                            </div>
+                            <div class="skill-track">
+                                <div class="skill-fill" data-w="40" style="--clr:#b482ff"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span>Lua</span><span class="skill-pct">25%</span>
+                            </div>
+                            <div class="skill-track">
+                                <div class="skill-fill" data-w="25" style="--clr:#818cf8"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="stats" class="profile-section">
+                    <h2>Stats</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" data-target="112" id="stat-days">0</div>
+                            <div class="stat-label">Days Coding</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" data-target="4" id="stat-projects">0</div>
+                            <div class="stat-label">Projects Done</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" data-target="12616" id="stat-hoursAov">0</div>
+                            <div class="stat-label">AOV's Hours Grinded</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" data-target="660" id="stat-hoursCs2">0</div>
+                            <div class="stat-label">CS2's Hours Grinded</div>
+                        </div>
+                    </div>
+                </section>
+                <section id="achievements" class="profile-section">
+                    <h2>Achievements</h2>
+                    <div class="badge-grid">
+                        <div class="badge-card unlocked" data-tip="Hello World">
+                            <div class="badge-icon">👾</div>
+                            <div class="badge-name"><b>First Boot</b></div>
+                            <div class="badge-rarity common">COMMON</div>
+                        </div>
+                        <div class="badge-card unlocked" data-tip="Night Owl">
+                            <div class="badge-icon">🌙</div>
+                            <div class="badge-name"><b>Night Owl</b></div>
+                            <div class="badge-rarity legendary">LEGENDARY</div>
+                        </div>
+                        <div class="badge-card unlocked" data-tip="Love">
+                            <div class="badge-icon">❤️</div>
+                            <div class="badge-name"><b>Love</b></div>
+                            <div class="badge-rarity epic">EPIC</div>
+                        </div>
+                        <div class="badge-card unlocked" data-tip="Scholar">
+                            <div class="badge-icon">🎓</div>
+                            <div class="badge-name"><b>Scholar</b></div>
+                            <div class="badge-rarity rare">RARE</div>
+                        </div>
+                        <div class="badge-card unlocked" data-tip="Gaming">
+                            <div class="badge-icon">🎮</div>
+                            <div class="badge-name"><b>Gaming</div>
+                            <div class="badge-rarity legendary">LEGENDARY</div>
+                        </div>
+                        <div class="badge-card unlocked" data-tip="Coding">
+                            <div class="badge-icon">💀</div>
+                            <div class="badge-name">Coding</div>
+                            <div class="badge-rarity common">COMMON</div>
+                        </div>
+                    </div>
+                    <div class="badge-tooltip" id="badge-tip"></div>
                 </section>
                 <section id="lienhe" class="profile-section">
                     <h2>Contact</h2>
@@ -108,16 +208,42 @@
                     </div>
                 </section>
 
-            </div> </div> </div>
-            <div class="snowflakes" aria-hidden="true">
-                <div class="snowflake">❅</div><div class="snowflake">❆</div><div class="snowflake">❅</div>
-                <div class="snowflake">❆</div><div class="snowflake">❅</div><div class="snowflake">❆</div>
-                <div class="snowflake">❅</div><div class="snowflake">❆</div><div class="snowflake">❅</div>
-                <div class="snowflake">❆</div><div class="snowflake">❅</div><div class="snowflake">❆</div>
-                <div class="snowflake">❆</div><div class="snowflake">❅</div><div class="snowflake">❆</div>
-                <div class="snowflake">❆</div><div class="snowflake">❅</div><div class="snowflake">❆</div>
-                <div class="snowflake">❆</div><div class="snowflake">❅</div>
             </div>
-            <script src="myscripts.js"></script>
-         </body>
+        </div>
+    </div>
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+    </div>
+    <!-- Nút toggle dark/light -->
+    <button id="theme-toggle-btn" title="Toggle Dark/Light Mode">🌙</button>
+    <!-- Canvas mưa (light mode) -->
+    <div class="raindrops" id="rain-container" aria-hidden="true"></div>
+    <div id="boot-screen">
+        <div id="boot-text"></div>
+        <div id="boot-bar-wrap">
+            <div id="boot-bar"></div>
+        </div>
+    </div>
+    <script src="myscripts.js"></script>
+</body>
+
 </html>
