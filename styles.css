@@ -739,12 +739,14 @@ body {
 
 
     .profile-card {
-        width: 92%;
-        height: 85vh;
+        width: 86%;
+        height: 82vh;
         display: flex;
         flex-direction: column;
         overflow-y: auto;
         overflow-x: hidden;
+        backdrop-filter: blur(6px) saturate(120%);
+        -webkit-backdrop-filter: blur(6px);
     }
 
 
@@ -819,7 +821,8 @@ body {
 
 @media screen and (max-width: 400px) {
     .profile-card {
-        height: 90vh;
+        width: 88%;
+        height: 85vh;
     }
 
     .profile-avatar {
