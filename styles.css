@@ -2041,3 +2041,40 @@ body.light-mode .badge-rarity {
     /* Khi sang Light Mode thì tắt hết text-shadow phát quang để nhìn cho rõ */
     text-shadow: none !important;
 }
+@media (max-width: 768px) {
+    .overlay {
+        position: relative;
+        align-items: flex-start;
+        min-height: 100vh;
+    }
+
+    .profile-card {
+        grid-template-columns: 1fr;
+        height: auto;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    .profile-sidebar {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 28px 20px;
+    }
+
+    .profile-main-content {
+        height: auto;
+        overflow-y: visible;
+        padding: 20px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .badge-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
