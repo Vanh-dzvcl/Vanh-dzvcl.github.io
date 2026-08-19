@@ -9,7 +9,7 @@ let gIsLight = false;
     if (!screen) return;
 
     const lines = [
-        { t: '> Initializing PVA_OS v2.0.7...', c: '#b482ff' },
+        { t: '> Initializing OS', c: '#b482ff' },
         { t: '> Loading kernel modules...      [OK]', c: '#888' },
         { t: '> Mounting filesystem...         [OK]', c: '#888' },
         { t: '> Checking network interface...  [OK]', c: '#888' },
@@ -96,7 +96,6 @@ let gIsLight = false;
     const lines = [
         'First-year Student',
         'Junior Developer',
-        'CS2 / AOV Enjoyer',
         'Kn1ghT',
     ];
     const el = document.querySelector('.profile-tagline');
@@ -137,133 +136,6 @@ let gIsLight = false;
     updateTime();
     setInterval(updateTime, 1000);
     setInterval(pingLat, 3000);
-})();
-
-/* ============================================
-   5. KONAMI CODE (MATRIX TEXT TRIGGER)
-   ============================================ */
-(function () {
-    const SEQ = ['w', 'a', 's', 'd'];
-    let idx = 0;
-
-    document.addEventListener('keydown', (e) => {
-        idx = (e.key === SEQ[idx]) ? idx + 1 : (e.key === SEQ[0] ? 1 : 0);
-        if (idx === SEQ.length) {
-            idx = 0;
-            activateKonami();
-        }
-    });
-
-    function activateKonami() {
-        // Flash màn hình & xoay avatar
-        document.body.style.animation = 'rainbowFlash 0.5s ease 6';
-        setTimeout(() => { document.body.style.animation = ''; }, 3200);
-
-        const av = document.querySelector('.avatar-glitch-container');
-        if (av) {
-            av.style.animation = 'spin360 0.8s cubic-bezier(0.68,-0.55,0.265,1.55) 3';
-            setTimeout(() => { av.style.animation = ''; }, 2600);
-        }
-
-        // Hiện chữ ẩn
-        const ghost = document.createElement('div');
-        ghost.className = 'konami-toast';
-        document.body.appendChild(ghost);
-        setTimeout(() => ghost.remove(), 5000); 
-
-        const mc = document.getElementById('matrix-canvas');
-        const overlay = document.querySelector('.overlay');
-        const btn = document.getElementById('theme-toggle-btn');
-
-        const rect = btn.getBoundingClientRect();
-        const cx = Math.round(rect.left + rect.width / 2);
-        const cy = Math.round(rect.top + rect.height / 2);
-        const R = Math.ceil(Math.hypot(
-            Math.max(cx, window.innerWidth - cx),
-            Math.max(cy, window.innerHeight - cy)
-        ));
-
-        // Bung canvas che toàn màn hình
-        mc.style.setProperty('opacity', '1', 'important');
-        mc.style.setProperty('z-index', '99999', 'important');
-        mc.style.transition = 'clip-path 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
-        mc.style.clipPath = `circle(0px at ${cx}px ${cy}px)`;
-
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-            mc.style.clipPath = `circle(${R}px at ${cx}px ${cy}px)`;
-        }));
-        if (overlay) overlay.style.opacity = '0';
-
-        // Thu hồi lại mọi thứ sau 6 giây
-        setTimeout(() => {
-            mc.style.clipPath = `circle(0px at ${cx}px ${cy}px)`;
-
-            setTimeout(() => {
-                mc.style.removeProperty('opacity');
-                mc.style.removeProperty('z-index');
-                mc.style.transition = '';
-                mc.style.clipPath = '';
-                if (overlay) overlay.style.opacity = '';
-            }, 650);
-        }, 6000); 
-    }
-})();
-
-/* ============================================
-   6. MINI TERMINAL
-   ============================================ */
-(function () {
-    const out = document.getElementById('mini-term-output');
-    if (!out) return;
-
-    const lines = [
-        { html: '<span class="t-include">#include</span> <span class="t-string">&lt;iostream&gt;</span>', plain: '#include <iostream>', type: true },
-        { html: '<span class="t-keyword">using namespace</span> std;', plain: 'using namespace std;', type: true },
-        { html: '<span class="t-keyword">int</span> <span class="t-func">main</span>() {', plain: 'int main() {', type: true },
-        { html: '&nbsp;&nbsp;cout <span class="t-keyword">&lt;&lt;</span> <span class="t-string">"Phan Viet Anh"</span>;', plain: '  cout << "Phan Viet Anh";', type: true },
-        { html: '}', plain: '}', type: true },
-        { html: '<span class="t-comment">$ g++ main.cpp && ./a.out</span>', plain: null, type: false },
-        { html: '<span class="t-output">&gt; Phan Viet Anh</span>', plain: null, type: false },
-    ];
-
-    let li = 0;
-
-    function typeLine(rowEl, line, callback) {
-        const plain = line.plain;
-        let ci = 0;
-        function typeChar() {
-            if (ci >= plain.length) {
-                rowEl.innerHTML = line.html;
-                setTimeout(callback, 200);
-                return;
-            }
-            const cursor = document.createElement('span');
-            cursor.className = 't-cursor';
-            rowEl.textContent = plain.substring(0, ++ci);
-            rowEl.appendChild(cursor);
-            setTimeout(typeChar, 50);
-        }
-        typeChar();
-    }
-
-    function nextLine() {
-        if (li >= lines.length) {
-            setTimeout(() => { out.innerHTML = ''; li = 0; setTimeout(nextLine, 400); }, 3000);
-            return;
-        }
-        const row = document.createElement('div');
-        out.appendChild(row);
-        const line = lines[li];
-
-        if (line.type) {
-            typeLine(row, line, () => { li++; setTimeout(nextLine, 150); });
-        } else {
-            row.innerHTML = line.html;
-            li++;
-            setTimeout(nextLine, li === 5 ? 600 : 300);
-        }
-    }
-    setTimeout(nextLine, 800);
 })();
 
 /* ============================================
@@ -472,16 +344,6 @@ let gIsLight = false;
     });
 })();
 /* ============================================
-   XP BAR FILL ON LOAD
-   ============================================ */
-(function () {
-    const fill = document.querySelector('.xp-bar-fill');
-    if (!fill) return;
-    setTimeout(() => {
-        fill.style.width = fill.dataset.xp + '%';
-    }, 1800); // chờ boot screen xong
-})();
-/* ============================================
    NAME SCRAMBLE ON HOVER
    ============================================ */
 (function () {
@@ -516,23 +378,6 @@ let gIsLight = false;
     });
 })();
 /* ============================================
-   SKILL BARS ANIMATE ON SCROLL
-   ============================================ */
-(function () {
-    const fills = document.querySelectorAll('.skill-fill');
-    if (!fills.length) return;
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                const el = e.target;
-                setTimeout(() => { el.style.width = el.dataset.w + '%'; }, 200);
-                obs.unobserve(el);
-            }
-        });
-    }, { threshold: 0.5 });
-    fills.forEach(f => obs.observe(f));
-})();
-/* ============================================
    IDLE AVATAR HEARTBEAT
    ============================================ */
 (function () {
@@ -563,44 +408,6 @@ let gIsLight = false;
     document.addEventListener('keydown', resetTimer);
     resetTimer();
 })();
-/* ============================================
-   DOUBLE CLICK NAME → GLITCH STORM
-   ============================================ */
-(function () {
-    const name = document.querySelector('.profile-name');
-    const sidebar = document.querySelector('.profile-sidebar');
-    if (!name || !sidebar) return;
-
-    name.addEventListener('dblclick', () => {
-        sidebar.style.animation = 'sidebarStorm 0.08s steps(1) infinite';
-        const style = document.createElement('style');
-        style.id = 'storm-style';
-        style.textContent = `
-            @keyframes sidebarStorm {
-                0%  { filter:none; transform:none; }
-                10% { filter:hue-rotate(90deg) invert(0.1); transform:translate(-3px,1px); }
-                20% { filter:brightness(1.8) saturate(3); transform:translate(3px,-2px); }
-                30% { filter:hue-rotate(180deg); transform:translate(-1px,3px) skewX(2deg); }
-                40% { filter:none; transform:translate(2px,0); }
-                50% { filter:invert(0.05) brightness(1.4); transform:translate(-2px,-1px) skewX(-1deg); }
-                60% { filter:hue-rotate(270deg) saturate(2); transform:translate(1px,2px); }
-                70% { filter:none; transform:none; }
-                80% { filter:brightness(2); transform:translate(-3px,-3px); }
-                90% { filter:hue-rotate(45deg); transform:translate(2px,1px) skewY(1deg); }
-                100% { filter:none; transform:none; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        setTimeout(() => {
-            sidebar.style.animation = '';
-            document.getElementById('storm-style')?.remove();
-        }, 1500);
-    });
-})();
-/* ============================================
-   VIBE STATUS (time-based)
-   ============================================ */
 (function () {
     const icon = document.getElementById('vibe-icon');
     const text = document.getElementById('vibe-text');
@@ -619,100 +426,4 @@ let gIsLight = false;
     const vibe = vibes.find(v => h >= v.h[0] && h <= v.h[1]) || vibes[0];
     icon.textContent = vibe.i;
     text.textContent = vibe.t;
-})();
-/* ============================================
-   STATS COUNTER ANIMATE
-   ============================================ */
-(function () {
-    const cards = document.querySelectorAll('.stat-value');
-    if (!cards.length) return;
-
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            // Chưa lướt tới thì nghỉ
-            if (!entry.isIntersecting) return;
-            
-            const el = entry.target;
-
-            // Lọc tạp chất, nhổ sạch dấu phẩy/chữ cái ra khỏi số
-            const rawTarget = el.dataset.target ? el.dataset.target.replace(/,/g, '') : "0";
-            const target = parseInt(rawTarget) || 0; // || 0 để né quả NaN chí mạng
-            
-            const duration = 1600; // Tốc độ animation 1.6s
-            const start = performance.now();
-
-            function tick(now) {
-                // Ép p không bao giờ được âm (khắc phục lỗi frame đầu tiên)
-                const p = Math.max(0, Math.min((now - start) / duration, 1));
-                
-                // Công thức easeOutExpo (chạy nhanh lúc đầu, rà phanh lúc sau)
-                const ease = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
-                
-                // Hàm format tiền tỷ
-                function fmtNum(n) {
-                    // Dùng cái này nó tự phẩy cho hàng nghìn, hàng triệu luôn: 75,696
-                    return n.toLocaleString('en-US'); 
-                }
-
-                // Gắn số vào màn hình
-                el.textContent = fmtNum(Math.floor(ease * target));
-                
-                if (p < 1) {
-                    requestAnimationFrame(tick); // Chưa đủ thời gian thì chạy tiếp
-                } else {
-                    el.textContent = fmtNum(target); // Chốt sổ 100% khi kết thúc
-                }
-            }
-            
-            requestAnimationFrame(tick);
-            obs.unobserve(el); // Chạy 1 lần rồi phắn. Muốn lướt lên lướt xuống nó giật lại thì xóa dòng này đi!
-        });
-    }, { threshold: 0.4 }); // Phải lướt qua 40% phần tử nó mới kích hoạt
-
-    cards.forEach(c => obs.observe(c));
-})();
-
-/* ============================================
-   ACHIEVEMENT BADGE TOOLTIP + UNLOCK PULSE
-   ============================================ */
-(function () {
-    const tip = document.getElementById('badge-tip');
-    if (!tip) return;
-
-    document.querySelectorAll('.badge-card.unlocked').forEach(card => {
-        card.addEventListener('mouseenter', e => {
-            tip.textContent = card.dataset.tip || '';
-            tip.style.opacity = '1';
-        });
-        card.addEventListener('mousemove', e => {
-            tip.style.left = (e.clientX + 14) + 'px';
-            tip.style.top  = (e.clientY - 32) + 'px';
-        });
-        card.addEventListener('mouseleave', () => {
-            tip.style.opacity = '0';
-        });
-    });
-
-    // Pulse animation cho unlocked badges khi vào viewport
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            const cards = entry.target.querySelectorAll('.badge-card.unlocked');
-            cards.forEach((c, i) => {
-                setTimeout(() => {
-                    c.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
-                    c.style.transform = 'scale(1.08)';
-                    c.style.boxShadow = '0 0 18px rgba(180,130,255,0.35)';
-                    setTimeout(() => {
-                        c.style.transform = '';
-                        c.style.boxShadow = '';
-                    }, 220);
-                }, i * 120);
-            });
-            obs.unobserve(entry.target);
-        });
-    }, { threshold: 0.3 });
-
-    const grid = document.querySelector('.badge-grid');
-    if (grid) obs.observe(grid);
-})();
+})();   

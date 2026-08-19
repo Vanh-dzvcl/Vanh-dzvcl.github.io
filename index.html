@@ -22,62 +22,37 @@
             <div class="profile-sidebar">
                 <div class="avatar-glitch-container">
                     <img src="pva1.jpg" alt="Phan Việt Anh" class="profile-avatar av-1">
-
                     <img src="pva.jpg" alt="Phan Việt Anh Glitch" class="profile-avatar av-2">
                 </div>
                 <h1 class="profile-name">Phan Việt Anh</h1>
                 <div class="typing-container">
                     <p class="profile-tagline"></p>
                 </div>
-                <div class="status-badge">
-                    <div class="xp-bar-wrap">
-                        <div class="xp-bar-label">
-                            <span>LVL <strong>18</strong></span>
-                            <span class="xp-class">[KNIGHT]</span>
-                            <span>2840 / 5000 XP</span>
-                        </div>
-                        <div class="xp-bar-track">
-                            <div class="xp-bar-fill" data-xp="56"></div>
-                        </div>
-                    </div>
-                    <span class="status-dot"></span>
-                    <span class="status-label">Online</span>
-                </div>
                 <div class="vibe-bar">
                     <span class="vibe-icon" id="vibe-icon">⚡</span>
                     <span class="vibe-text" id="vibe-text">Loading vibe...</span>
                 </div>
-                <div class="basic-info"> <!-- ← div riêng cho bio -->
+                <div class="basic-info">
                     <p><strong>Birth:</strong> 29/09/2007</p>
                     <p><strong>Lives in:</strong> Dong Nai and Ho Chi Minh City</p>
                     <p><strong>Studies at:</strong> Ho Chi Minh City University of Transport</p>
                 </div>
-                <!-- THAY ĐOẠN NÀY trong .profile-sidebar -->
-                <div class="now-playing"> <!-- ← đổi class từ basic-info -->
+                <div class="now-playing">
                     <div class="np-label"><i class="fa-brands fa-soundcloud"></i>&nbsp;NOW PLAYING</div>
-                    <div class="np-title">thats all i can see - MR LO</div>
+                    <div class="np-title">Nếu như ta chẳng còn - MCK</div>
                     <div class="np-bars">
                         <span></span><span></span><span></span><span></span><span></span><span></span>
                     </div>
-                </div>
-                <div class="mini-terminal">
-                    <div class="mini-term-header">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                        <span class="mini-term-title">main.cpp</span>
-                    </div>
-                    <div class="mini-term-body" id="mini-term-output"></div>
                 </div>
                 <div style="font-size:11px;color:#aaa;font-family:monospace;margin-top:auto;padding-top:11px;">
                     <span id="sys-lat">LAT:--ms</span> &nbsp;|&nbsp; <span id="sys-time">--:--:--</span>
                 </div>
             </div>
+
             <div class="profile-main-content">
                 <section id="mxh" class="profile-section">
                     <h1>Social Media</h1>
                     <div class="game-cards"> 
-                        
                         <a href="https://www.facebook.com/knight.so.bad" class="game-card" style="text-decoration: none;" target="_blank">
                             <i class="fa-brands fa-facebook" style="color: #1877f2;"></i>
                             <div class="gc-name">Facebook</div>
@@ -95,21 +70,21 @@
                             <div class="gc-name">SoundCloud</div>
                             <div class="gc-rank">Kn1ghT</div>
                         </a>
-
                     </div>
                 </section>
+
                 <section id="thongtingame" class="profile-section">
                     <h2>Gaming</h2>
                     <div class="game-cards">
                         <div class="game-card">
                             <i class="fa-solid fa-mobile-screen-button"></i>
                             <div class="gc-name">AOV</div>
-                            <div class="gc-rank">Rank: Legendary</div>
+                            <div class="gc-rank">Rank: Chien Than</div>
                         </div>
                         <div class="game-card">
                             <i class="fa-solid fa-chess-knight"></i>
                             <div class="gc-name">TFT</div>
-                            <div class="gc-rank">Rank: Gold</div>
+                            <div class="gc-rank">Rank: Diamond</div>
                         </div>
                         <div class="game-card">
                             <i class="fa-solid fa-crosshairs"></i>
@@ -118,84 +93,7 @@
                         </div>
                     </div>
                 </section>
-                <section id="terminal-skills" class="profile-section">
-                    <h2>Skill</h2>
-                    <div class="skill-bars">
-                        <div class="skill-item">
-                            <div class="skill-meta">
-                                <span>C++</span><span class="skill-pct">40%</span>
-                            </div>
-                            <div class="skill-track">
-                                <div class="skill-fill" data-w="40" style="--clr:#b482ff"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-meta">
-                                <span>Lua</span><span class="skill-pct">25%</span>
-                            </div>
-                            <div class="skill-track">
-                                <div class="skill-fill" data-w="25" style="--clr:#818cf8"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section id="stats" class="profile-section">
-                    <h2>Stats</h2>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-value" data-target="112" id="stat-days">0</div>
-                            <div class="stat-label">Days Coding</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" data-target="4" id="stat-projects">0</div>
-                            <div class="stat-label">Projects Done</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" data-target="12616" id="stat-hoursAov">0</div>
-                            <div class="stat-label">AOV's Hours Grinded</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" data-target="660" id="stat-hoursCs2">0</div>
-                            <div class="stat-label">CS2's Hours Grinded</div>
-                        </div>
-                    </div>
-                </section>
-                <section id="achievements" class="profile-section">
-                    <h2>Achievements</h2>
-                    <div class="badge-grid">
-                        <div class="badge-card unlocked" data-tip="Hello World">
-                            <div class="badge-icon">👾</div>
-                            <div class="badge-name"><b>First Boot</b></div>
-                            <div class="badge-rarity common">COMMON</div>
-                        </div>
-                        <div class="badge-card unlocked" data-tip="Night Owl">
-                            <div class="badge-icon">🌙</div>
-                            <div class="badge-name"><b>Night Owl</b></div>
-                            <div class="badge-rarity legendary">LEGENDARY</div>
-                        </div>
-                        <div class="badge-card unlocked" data-tip="Love">
-                            <div class="badge-icon">❤️</div>
-                            <div class="badge-name"><b>Love</b></div>
-                            <div class="badge-rarity epic">EPIC</div>
-                        </div>
-                        <div class="badge-card unlocked" data-tip="Scholar">
-                            <div class="badge-icon">🎓</div>
-                            <div class="badge-name"><b>Scholar</b></div>
-                            <div class="badge-rarity rare">RARE</div>
-                        </div>
-                        <div class="badge-card unlocked" data-tip="Gaming">
-                            <div class="badge-icon">🎮</div>
-                            <div class="badge-name"><b>Gaming</div>
-                            <div class="badge-rarity legendary">LEGENDARY</div>
-                        </div>
-                        <div class="badge-card unlocked" data-tip="Coding">
-                            <div class="badge-icon">💀</div>
-                            <div class="badge-name">Coding</div>
-                            <div class="badge-rarity common">COMMON</div>
-                        </div>
-                    </div>
-                    <div class="badge-tooltip" id="badge-tip"></div>
-                </section>
+
                 <section id="lienhe" class="profile-section">
                     <h2>Contact</h2>
                     <div class="contact-box">
