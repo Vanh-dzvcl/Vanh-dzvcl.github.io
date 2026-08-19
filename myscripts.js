@@ -351,7 +351,7 @@ let gIsLight = false;
     if (!el) return;
 
     const originalName = el.textContent.trim();
-    const aliasName = "t0iy3uch1k2"; // Bro điền tên biến hình vào đây
+    const aliasName = "t0iy3uch1k4"; // Bro điền tên biến hình vào đây
 
     el.addEventListener('dblclick', () => {
         // Nếu đang là tên gốc thì đổi sang tên mới, ngược lại thì về tên gốc
