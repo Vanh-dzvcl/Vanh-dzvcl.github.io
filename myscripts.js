@@ -349,32 +349,13 @@ let gIsLight = false;
 (function () {
     const el = document.querySelector('.profile-name');
     if (!el) return;
-    const original = el.textContent;
-    // Bảng chữ cái rác để nó random
-    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
-    let frame;
 
-    // Khi bro đút chuột vào -> Khởi động động cơ giật
-    el.addEventListener('mouseenter', () => {
-        // Tránh tình trạng trỏ chuột ra vào liên tục bị lỗi đè lặp (spam interval)
-        clearInterval(frame);
-        
-        el.classList.add('scrambling'); // Bật css nhòe màu
+    const originalName = el.textContent.trim();
+    const aliasName = "t0iy3uch1k2"; // Bro điền tên biến hình vào đây
 
-        // Cho nó random kí tự liên tục mãi mãi
-        frame = setInterval(() => {
-            el.textContent = original.split('').map(ch => {
-                if (ch === ' ') return ' '; // Dấu cách thì giữ nguyên cho có form
-                return CHARS[Math.floor(Math.random() * CHARS.length)];
-            }).join('');
-        }, 45); // Tốc độ giật 45ms (càng nhỏ giật càng kinh)
-    });
-
-    // Khi bro rút chuột ra -> Trả lại tên thật, ngưng tấu hề
-    el.addEventListener('mouseleave', () => {
-        clearInterval(frame); // Rút phích cắm
-        el.textContent = original; // Trả lại tên đẹp trai
-        el.classList.remove('scrambling'); // Tắt css nhòe màu
+    el.addEventListener('dblclick', () => {
+        // Nếu đang là tên gốc thì đổi sang tên mới, ngược lại thì về tên gốc
+        el.textContent = (el.textContent.trim() === originalName) ? aliasName : originalName;
     });
 })();
 /* ============================================
